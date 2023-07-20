@@ -1,4 +1,4 @@
-package com.morgan.restaurant.Repository;
+package com.morgan.restaurant.repository;
 
 
 import com.morgan.restaurant.model.Category;
