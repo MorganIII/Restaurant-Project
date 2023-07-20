@@ -3,8 +3,6 @@ package com.morgan.restaurant.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Type;
-
 import javax.persistence.*;
 
 @Data
@@ -21,7 +19,7 @@ public class Order extends CategoryOrder{
     private String img;
 
 
-    @Type( type = "org.hibernate.type.MaterializedClobType")
+    @Lob
     @Column(name = "description")
     private String description;
 
