@@ -1,0 +1,10 @@
+<a routerLink="/purchases">
+    <div class="statusCard" >
+        <span class="span">
+            {{totalPrice | currency: 'USD'}}
+            <i class="fas fa-coins">     
+            </i> | {{totalOrders}}</span>
+        <i class="fas fa-cart-arrow-down"></i>
+    </div>
+</a>
+

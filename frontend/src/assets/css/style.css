@@ -1158,3 +1158,68 @@ section {
 {
   background-color: tomato;
 }
+
+.order-item
+{
+  height: 710px;
+}
+/*
+.mybu 
+{
+  position: absolute;
+  bottom: 0;
+  width: 270px;
+}
+*/
+
+img{
+  height: 220px ;
+}
+
+.order-item {
+  height: 382px;
+}
+
+#hero h1 {
+  font-size: 23px;
+  font-family: revert;
+}
+.btn:not(:disabled):not(.disabled) {
+  margin: 0px 0px 0px 0px !important;
+}
+
+.menu-active {
+  background-color: cadetblue;
+  color: aliceblue;
+}
+
+
+
+.check-out
+{
+  border-radius: 30px;
+  background-color: white;
+  padding: 20px;
+  width: 400px;
+  font-size: 21px;
+  font-weight: bold;
+  margin: 40px 369px;
+}
+.done
+{
+  width: 366px;
+}
+.size
+{
+  background-color: crimson;
+  padding: 8px;
+  color: aliceblue;
+  margin-bottom: 5px;
+}
+.totalprice
+{
+  margin-bottom: 20px;
+  background-color: blueviolet;
+  padding: 8px;
+  color: aliceblue;
+}

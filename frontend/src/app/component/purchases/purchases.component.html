@@ -1,0 +1,28 @@
+<div class="row">
+    <div *ngFor="let order of orders" class="col-md-4 myorder buyingorder" >
+      <div class="card order-item">
+          <div class="totprice">{{order.price * order.quantity | currency: 'USD'}}</div>
+          <div class="totprice to2">{{order.price | currency: 'USD'}}</div>
+          <img src="assets/img/{{order.img}}.jpg" alt="Denim Jeans" style="width:100%">
+          <h1>name</h1>
+        <p class="price">
+            <i (click)="incrementOrderQuantity(order)" class="fas fa-plus"></i>
+            <span>{{order.quantity}}</span>
+            <i (click)="decrementOrderQuantity(order)" class="fas fa-minus"></i></p>
+        <button (click)="onRemoveOrder(order)" class="btn btn-primary mybu">Remove</button>
+      </div>
+    </div>
+</div>
+
+
+<div *ngIf="orders?.length == 0" class="alert alert-danger" role="alert">
+    Your Cart is Empty
+</div>
+
+<div class="check-out">
+    <div class="size">Total Orders : {{totalOrders}}</div>
+    <div class="totalprice">Total Price : {{totalPrice | currency: 'USD'}}</div>
+    <a routerLink="/check-out">
+      <button *ngIf="orders.length !== 0" type="button" class="btn btn-primary done">Done</button>
+    </a>
+</div>
