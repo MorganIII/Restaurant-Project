@@ -57,8 +57,8 @@ cd Restaurant-Project
 cd frontend
 npm install
 ```
-##### 4. Build the frontend:
-`ng build`
+4. Build the frontend:
+* `ng build`
 
 ## Project Structure
 The project is organized into two main directories:
