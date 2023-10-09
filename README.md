@@ -38,12 +38,12 @@ This system provides a user-friendly interface for restaurant staff to handle ta
 * Angular CLI
 
 ### Installation
-###### 1. Clone the repository:
+1. Clone the repository:
 ```
 https://github.com/MorganIII/Restaurant-Project.git
 cd Restaurant-Project
 ```
-###### 2. Configure the backend:
+2. Configure the backend:
 
 * Create a MySQL restaurant database and update the database configuration in `backend/src/main/resources/application.properties`.
 
@@ -51,7 +51,7 @@ cd Restaurant-Project
 
 * Run the SQL queries that are in the `\backend\Restaurant-Project\src\main\resources` directory.
 
-###### 3. Configure the frontend:
+3. Configure the frontend:
 * Navigate to the frontend directory and install dependencies:
 ```
 cd frontend
@@ -63,7 +63,7 @@ npm install
 ## Project Structure
 The project is organized into two main directories:
 
-* **backend**: Contains the Spring Boot backend code.
+* **Backend**: Contains the Spring Boot backend code.
 * **frontend**: Contains the Angular frontend code.
 
 ## Backend
