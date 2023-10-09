@@ -10,7 +10,6 @@ export class OrderServiceService {
   private baseUrl = 'http://localhost:8080/api/';
   
   constructor(private http: HttpClient) { }
-
   getOrders(page: number, size: number) : Observable <Order[]> {
     return this.http.get<Order[]>(`${this.baseUrl}orders?page=${page}&size=${size}`).pipe(
       map(

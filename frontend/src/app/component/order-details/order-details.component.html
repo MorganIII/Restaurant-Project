@@ -1,14 +1,16 @@
 <a routerLink="/orders">
   <i class="fas fa-undo" style="font-size: 60px;"></i>
 </a>
-<div class="row">
-    <div class="oneOrder">
-      <div class="mycard order-item">
-        <img src="assets/img/{{order.img}}.jpg" alt="Denim Jeans" style="width:100%">
-        <h1>{{order.name}}</h1>
-        <h3>{{order.description}}</h3>
-        <p class="price">{{order.price | currency: 'USD'}}</p>
-        <button (click)="addToCart(order)" class="btn btn-primary orbut">Add to Cart</button>
+<div *ngIf="order">
+  <div class="row">
+      <div class="oneOrder">
+        <div class="mycard order-item">
+          <img src="assets/img/{{order.img}}.jpg" alt="Denim Jeans" style="width:100%">
+          <h1>{{order.name}}</h1>
+          <h3>{{order.description}}</h3>
+          <p class="price">{{order.price | currency: 'USD'}}</p>
+          <button (click)="addToCart(order)" class="btn btn-primary orbut">Add to Cart</button>
+        </div>
       </div>
-    </div>
   </div>
+</div>

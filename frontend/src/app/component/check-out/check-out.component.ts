@@ -1,9 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Client } from 'src/app/model/client';
 import { Country } from 'src/app/model/country';
+import { Item } from 'src/app/model/item';
+import { PurchaseRequest } from 'src/app/model/purchase-request';
+import { RequestOrder } from 'src/app/model/request-order';
 import { SpaceValidator } from 'src/app/model/space-validator';
 import { State } from 'src/app/model/state';
 import { CartService } from 'src/app/service/cart.service';
+import { PurchaseService } from 'src/app/service/purchase.service';
 import { StateCountryService } from 'src/app/service/state-country.service';
 
 @Component({
@@ -21,7 +27,9 @@ export class CheckOutComponent implements OnInit{
   totalPrice: number;
   constructor(private formChildGroup: FormBuilder,
               private stateCountryService: StateCountryService,
-              private cartService: CartService){
+              private cartService: CartService,
+              private purchaseService: PurchaseService,
+              private router: Router){
 
   }
 
@@ -85,10 +93,40 @@ export class CheckOutComponent implements OnInit{
 
   done(){
     if(this.checkoutParentGroup.valid){
-      console.log(this.checkoutParentGroup.value);
+      let values = this.checkoutParentGroup.controls['data'].value;
+      let client = new Client(values.fullName, values.gmail, values.phone);
+      let fromAddress = this.checkoutParentGroup.controls['fromPerson'].value;
+      fromAddress.state = fromAddress.state.name;
+      let toAddress = this.checkoutParentGroup.controls['toPerson'].value;
+      toAddress.state = toAddress.state.name;
+      let requestOrder = new RequestOrder(this.totalPrice, this.totalOrders);
+      let items: Item[] = [];
+      this.cartService.orders.forEach(
+        order => items.push(new Item(order))
+      );
+      let purchaseRequest = new PurchaseRequest(client, fromAddress, toAddress, requestOrder, items);
+      this.purchaseService.sendPurchaseRequest(purchaseRequest).subscribe({
+        next: response => {
+          console.log("ok");
+          console.log(response);
+          this.clean();
+        },
+        error: err => {
+          console.log("Error: " + err.message);
+        }
+      }
+      )
     }else {
       this.checkoutParentGroup.markAllAsTouched();
     }
+  }
+
+  clean() {
+    this.cartService.orders = [];
+    this.cartService.totalOrders.next(0);
+    this.cartService.totalPrice.next(0);
+    this.checkoutParentGroup.reset();
+    this.router.navigateByUrl('/orders');
   }
 
   similarPerson(event: Event){

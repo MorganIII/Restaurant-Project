@@ -1,12 +1,16 @@
 package com.morgan.restaurant.model;
 
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @Entity
 @Table(name = "client")
@@ -18,8 +22,8 @@ public class Client {
     @Column(name = "id")
     private long id;
 
-    @Column(name = "full_name")
-    private String fullName;
+    @Column(name = "name")
+    private String name;
 
     @Column(name = "email")
     private String email;
@@ -28,6 +32,10 @@ public class Client {
     private String phoneNumber;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "client")
+    private Set<RequestOrder> requestOrders = new HashSet<>();
 
-    private Set<RequestOrder> requestOrders;
+    public void addRequestOrder(RequestOrder requestOrder) {
+        requestOrders.add(requestOrder);
+        requestOrder.setClient(this);
+    }
 }

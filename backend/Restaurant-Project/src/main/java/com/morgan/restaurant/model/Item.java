@@ -1,11 +1,15 @@
 package com.morgan.restaurant.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @Entity
 @Table(name = "item")
@@ -17,7 +21,7 @@ public class Item {
     private long id;
 
     @Column(name = "image")
-    private String image;
+    private String img;
 
     @Column(name = "quantity")
     private int quantity;

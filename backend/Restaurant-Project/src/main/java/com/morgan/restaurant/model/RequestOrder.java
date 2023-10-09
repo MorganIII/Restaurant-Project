@@ -1,16 +1,17 @@
 package com.morgan.restaurant.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Set;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @Entity
 @Table(name = "request_order")
@@ -24,15 +25,11 @@ public class RequestOrder {
     @Column(name = "code")
     private String code;
 
-    @Column(name = "note")
-    @Lob
-    private String note;
-
     @Column(name = "total_price")
     private int totalPrice;
 
-    @Column(name = "quantity")
-    private int quantity;
+    @Column(name = "total_quantity")
+    private int totalQuantity;
 
     @Column(name = "data_created")
     @CreationTimestamp
@@ -44,17 +41,22 @@ public class RequestOrder {
 
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "requestOrder")
-    private Set<Item> items;
+    private Set<Item> items = new HashSet<>();
 
     @ManyToOne
     @JoinColumn(name = "client_id")
-    private Client client;
+    private Client client = new Client();
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "from_address_id", referencedColumnName = "id")
-    private Address fromAddress;
+    private Address fromAddress = new Address();
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "to_address_id", referencedColumnName = "id")
-    private Address toAddress;
+    private Address toAddress = new Address();
+
+    public void addItem(Item item) {
+        items.add(item);
+        item.setRequestOrder(this);
+    }
 }
